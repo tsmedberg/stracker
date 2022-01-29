@@ -1,4 +1,16 @@
+#!/usr/bin/env node
 import {shippers} from './shippers/index.js'
-console.log('Avaliable shippers:', shippers)
-let instabox = new shippers.Instabox('123', '12345')
-console.log('instabox:', instabox)
+import prompts from 'prompts';
+await prompts({
+    type: 'select',
+    name: 'shipper',
+    message: 'Select a shipper',
+    choices: Object.keys(shippers).map(key => ({title: key, value: key}))
+}).then(({shipper}) => {
+  let Shipper = shippers[shipper];
+  let options = Shipper.getOptions();
+  prompts(options).then((op) => {
+    let shipper = new Shipper(op);
+    shipper.getStatus().then(console.log).catch(console.error);
+  });
+});

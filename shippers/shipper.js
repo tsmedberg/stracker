@@ -23,7 +23,8 @@ export default class Shipper {
      * @abstract
      * @returns {object}
      */
-    getOptions() {
+    static getOptions() {
         throw new TypeError('getOptions() is not implemented');
     }
+    
 }
