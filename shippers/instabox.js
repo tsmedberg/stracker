@@ -11,13 +11,13 @@ export default class Instabox extends Shipper {
      */
     constructor(options) {
         super();
-        this.id = options.id;
+        this.id = options.id.trim();
         this.postalCode = options.postalCode;
     }
     static getOptions() {
         return [
             {
-              type: 'text',
+              type: 'input',
               name: 'id',
               message: "What's the package id?"
             },
@@ -37,7 +37,6 @@ export default class Instabox extends Shipper {
                     "Content-Type": "application/json",
                 },
                 "referrer": "https://track.instabox.io/",
-                /* "body": "{\"auth_code\":\"30237\",\"parcel_id\":\"MP0108831597\"}", */
                 "body": JSON.stringify({
                     "auth_code": `${this.postalCode}`,
                     "parcel_id": this.id

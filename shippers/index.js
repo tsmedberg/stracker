@@ -1,2 +1,3 @@
 import Instabox from './instabox.js';
-export let shippers = { Instabox };
+import PostNord from './postnord.js';
+export let shippers = { Instabox, PostNord };
